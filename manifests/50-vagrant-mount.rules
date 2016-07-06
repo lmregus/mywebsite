@@ -1,0 +1,2 @@
+SUBSYSTEM=="bdi",ACTION=="add",RUN+="/etc/init.d/supervisord start"
+SUBSYSTEM=="bdi",ACTION=="remove",RUN+="/etc/init.d/supervisord stop"
