@@ -1,13 +1,13 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">	
 		<ul class="nav navbar-nav">
-        	<li class="active"><a href="/">Home</a></li>
-			<li><a href="#about">About</a></li>
-        	<li><a href="/code-snippets">Code Snippets</a></li>
-			<li><a href="#resume">Resume</a></li>
+        	<li {% if '/' == request.path %}class="active"{% endif %}><a href="/">Home</a></li>
+			<li {% if 'about' in request.path[1:] %}class="active"{% endif %}><a href="/#about">About</a></li>
+        	<li {% if 'code-snippets' in request.path %}class="active"{% endif %}><a href="/code-snippets">Code Snippets</a></li>
+			<li {% if 'resume' in request.path %}class="active"{% endif %}><a href="/resume">Resume</a></li>
       	</ul>
       	<ul class="nav navbar-nav navbar-right">
-        	<li><a href="#contact">Contact</a></li>
+        	<li><a href="/contact">Contact</a></li>
       	</ul>
   	</div>
 </div>
