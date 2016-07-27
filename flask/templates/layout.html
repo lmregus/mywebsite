@@ -7,32 +7,29 @@
 		<link rel="stylesheet" href="../static/ux/css/main.css">
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>    
 		<script>
-		$('a[href^=#]').on("click",function(){
-    		var t= $(this.hash);
-		    var t=t.length&&t||$('[name='+this.hash.slice(1)+']');
-		    if(t.length){
-        		var tOffset=t.offset().top;
-		        $('html,body').animate({scrollTop:tOffset-20},'slow');
-        		return false;
-    		}
-		});
+			$(document).ready(function(){
+    			$("div[id^='snippet']").click(function(ev){
+					ev.preventDefault();	
+        			$(this).next().slideToggle();
+    			});
+			});
 		</script>
     </head>
 
     <body>
 		{% include "partials/primary_nav.html" %}
 		{% if slug != '/' %}
-			<div class="page-header">
-				<h1>{{ page_title }}</h1>
-			</div>
+			<div class="container">  
+				<div class="page-header" id="main-header">
+					<h1>{{ page_title }}</h1>
+				</div>
 		{% else %}
 			<header class="wide">
 			</header>
 		{% endif %}
-		<div id="main" class="container">
-			<div class="text-center">
-				{% block body%}{% endblock %}
+		{% block body%}{% endblock %}
+		{% if slug != '/' %}
 			</div>
-		</div>
+		{% endif %}
     </body>
 </html>
