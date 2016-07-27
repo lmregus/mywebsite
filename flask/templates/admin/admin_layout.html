@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Site</title>
+    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../static/ux/css/main.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>    
+    </head>
+
+    <body>
+		<div class="container">
+			<div class="page-header" id="main-header">
+ 				<h1>{{ page_title }}</h1>
+	 		</div>
+		<div id="main">
+			{% block body%}{% endblock %}
+		</div>
+    </body>
+</html>

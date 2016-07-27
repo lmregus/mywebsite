@@ -4,6 +4,7 @@ from flask import render_template
 from flask import request
 from flask import redirect
 
+from models.code_snippet import CodeSnippet
 
 @app.route('/')
 def index():
@@ -19,8 +20,9 @@ def resume_page():
 @app.route('/code-snippets')
 def code_snippets():
     page_title = 'Code Snippets'
+    code_snippets = CodeSnippet().get_all()
     slug = 'code-snippets'
-    return render_template('pages/code-snippets.html', slug = slug, page_title = page_title)
+    return render_template('pages/code-snippets.html', slug = slug, page_title = page_title, code_snippets = code_snippets)
 
 @app.route('/contact')
 def contact():
