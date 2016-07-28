@@ -5,6 +5,8 @@ from flask import request
 from flask import redirect
 
 from models.code_snippet import CodeSnippet
+from models.forms import ContactForm
+
 
 @app.route('/')
 def index():
@@ -24,8 +26,11 @@ def code_snippets():
     slug = 'code-snippets'
     return render_template('pages/code-snippets.html', slug = slug, page_title = page_title, code_snippets = code_snippets)
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    form = ContactForm(request.form)
     page_title = 'Contact Me'
     slug = 'contact'
-    return render_template('pages/contact.html', slug = slug, page_title = page_title)
+    #code to send form using email
+    #if request.method == 'POST' and form.validate(): 
+    return render_template('pages/contact.html', slug = slug, page_title = page_title, form = form)
