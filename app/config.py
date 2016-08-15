@@ -8,7 +8,7 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgres://flask_db_user:flask_db_pw@db-01.ihww.it/flask_db'
+    SQLALCHEMY_DATABASE_URI = 'postgres://postgres_test_user:pg_tst_pw@localhost:5432/postgres_test_db'
     DATABASE_URI = SQLALCHEMY_DATABASE_URI
 
 class TestingConfig(DevelopmentConfig):

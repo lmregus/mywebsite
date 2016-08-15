@@ -1,3 +1,3 @@
 #!/bin/bash
-cd flask
+cd app 
 gunicorn app:app --log-file -
