@@ -11,6 +11,9 @@ from sqlalchemy import Text
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
-app.config.from_object('config.DevelopmentConfig')
+if os.environ.get('HEROKU'):
+    app.config.from_object('config.ProductionConfig')
+else:
+    app.config.from_object('config.DevelopmentConfig')
 
 root = os.path.abspath(os.path.dirname(__file__))
