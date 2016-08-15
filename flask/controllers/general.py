@@ -3,6 +3,7 @@ from server import app
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask import send_file
 
 from models.code_snippet import CodeSnippet
 from models.forms import ContactForm
@@ -17,7 +18,11 @@ def index():
 def resume_page():
     page_title = 'Resume'
     slug = 'resume'
-    return render_template('pages/resume.html', slug = slug, page_title = page_title)
+    try:
+        return send_file('static/pdfs/LuisRegusCV3.pdf', attachment_filename='LuisRegusCV3.pdf')
+    except Exception as e:
+        return str(e)
+    #return render_template('pages/resume.html', slug = slug, page_title = page_title)
 
 @app.route('/code-snippets')
 def code_snippets():
