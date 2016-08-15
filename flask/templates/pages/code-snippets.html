@@ -1,14 +1,17 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{% for code_snippet in code_snippets %}
+{% for code_snippet in code_snippets|sort(attribute="programming_language", reverse=True) %}
 	<div id="snippet-{{ code_snippet.id }}">
-		<h1><button class="btn btn-default">{{ code_snippet.title }}</button><h1>
+		<h1><button class="btn btn-default">{{ code_snippet.title }} - {{ code_snippet.programming_language }}</button><h1>
 	</div>
 	<div id="{{ code_snippet.id }}-snippet">
 		<pre>
 			<code>
 {{ code_snippet.code }}
+{% if code_snippet.github_url %}
+<a href="{{ code_snippet.github_url }}" target="_blank">See on Github</a>
+{% endif %}
 			</code>
 		</pre>
 	</div>

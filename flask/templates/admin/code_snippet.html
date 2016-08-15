@@ -12,6 +12,23 @@
 			</div>
 		</fieldset>
 		<fieldset class="form-group">
+			<label for="github_url">Github URL</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="github_url">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="programming_language">Programming Language</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="programming_language">
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="form-group">
 			<label for="code">Code</label>
 			<div class="row">
 				<div class="col-xs-8">
@@ -23,8 +40,11 @@
 	</form>
 
 	<h1>Existing Code Snippets</h1>
-	{% for code_snippet in code_snippets %}
-		<h3>{{ code_snippet.title }}</h3>
+	{% for code_snippet in code_snippets|sort(attribute='programming_language') %}
+		<h3>{{ code_snippet.title }}</h3> - {{ code_snippet.programming_language }}
+		{% if code_snippet.github_url%}
+			<h2><a href="{{ code_snippet.github_url }}">see on github</a></h2>
+		{% endif %}
 			<pre>
 				<code>		
 {{ code_snippet.code }}

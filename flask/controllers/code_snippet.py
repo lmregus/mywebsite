@@ -20,18 +20,19 @@ def create_snippet():
     code_snippet = CodeSnippet()
     code_snippets = code_snippet.get_all()
     message = ''
-    page_
     if request.method == 'POST':
         data = {
             'title': request.form['title'],
-            'code': request.form['code']
+            'github_url': request.form['github_url'],
+            'programming_language': request.form['programming_language'],
+            'code': request.form['code'],
         }
         code_snippet = code_snippet.create(data)
         message = code_snippet.title + ' was created'
     else:
         message = 'There was an error trying to create the entry'
 
-    return render_template('admin/code_snippet.html', code_snippets = code_snippets, message = message, page_title = create_page)
+    return render_template('admin/code_snippet.html', code_snippets = code_snippets, message = message)
 
 @app.route('/code-snippet/edit/<snippet_id>', methods = ['POST', 'GET'])
 def edit_snippet(snippet_id):
@@ -47,6 +48,8 @@ def update_snippet():
         data = {
             'id': request.form['id'],
             'title': request.form['title'],
+            'github_url': request.form['github_url'],
+            'programming_language': request.form['programming_language'],
             'code': request.form['code'],
         }
         code_snippet = code_snippet.update(data)

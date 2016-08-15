@@ -5,8 +5,9 @@
 <form method="post" action="/code-snippet/update" name="update_snippet">
 	<input type="hidden"  name="id" value="{{ code_snippet.id }}">
 	Title : <input type="text" name="title" value="{{ code_snippet.title }}"/><br><br>
+	Github URL : <input type="text" name="github_url" value="{{ code_snippet.github_url}}"><br><br>
+	Programming Language : <input type="text" name="programming_language" value="{{ code_snippet.programming_language }}"><br><br>
 	Code : <br><textarea  name="code" rows="7" cols="32">{{ code_snippet.code }}</textarea><br><br>
-
 
 	<input type="submit" value="Update"><br>
 </form>
