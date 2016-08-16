@@ -1,9 +1,5 @@
 import os
 
-HEROKU_DB_USER=""
-HEROKU_DB_PASS=""
-HEROKU_DB_HOST=""
-HEROKU_DB_NAME=""
 try:
     from local_db_creds import *
 except ImportError:
@@ -20,10 +16,11 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgres://{0}:{1}@{2}:5432/{3}'.format(os.environ.get('HEROKU_DB_USER'), os.environ.get('HEROKU_DB_PASS'), os.environ.get('HEROKU_DB_HOST'), os.environ.get('HEROKU_DB_NAME'))
     DATABASE_URI = SQLALCHEMY_DATABASE_URI
 
-class DevelopmentConfig(Config):
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgres://{0}:{1}@{2}:5432/{3}'.format(HEROKU_DB_USER, HEROKU_DB_PASS, HEROKU_DB_HOST, HEROKU_DB_NAME)
-    DATABASE_URI = SQLALCHEMY_DATABASE_URI
+if not os.environ.get('HEROKU'):
+    class DevelopmentConfig(Config):
+        DEBUG = True
+        SQLALCHEMY_DATABASE_URI = 'postgres://{0}:{1}@{2}:5432/{3}'.format(HEROKU_DB_USER, HEROKU_DB_PASS, HEROKU_DB_HOST, HEROKU_DB_NAME)
+        DATABASE_URI = SQLALCHEMY_DATABASE_URI
 
 #class TestingConfig(DevelopmentConfig):
 #    TESTING = True
