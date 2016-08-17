@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,900);
+
 body,html {
  	height: 100%;
 }
@@ -30,3 +32,11 @@ div[id$="snippet"] {
 textarea.form-control {
 	height: 300px;
 }   
+
+.cap {
+	padding: 20px;
+	color: white;
+	font: 12px Monaco, Mono-Space;
+	margin: 0;
+	width: 400px;
+}
