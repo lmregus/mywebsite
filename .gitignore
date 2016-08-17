@@ -89,3 +89,6 @@ ENV/
 .ropeproject
 .env
 app/local_db_creds.py
+.vagrant
+*.swp
+.DS_Store
