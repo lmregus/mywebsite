@@ -39,4 +39,5 @@ textarea.form-control {
 	font: 12px Monaco, Mono-Space;
 	margin: 0;
 	width: 400px;
+	background-color: rgba(0,0,0,0.5);
 }
