@@ -1,0 +1,51 @@
+{% extends "admin/admin_layout.html" %}
+
+{{ message }}<br>
+{% block body %}
+	<form method="post" action="/admin/job/create" name="create_snippet">
+		<fieldset class="form-group">
+			<label for="title">Title</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="title">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="time_period">Time Period</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="time_period">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="company">Company</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="company">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="description">Description</label>
+			<div class="row">
+				<div class="col-xs-8">
+					<textarea class="form-control"  name="description" ></textarea>
+				</div>
+			</div>
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Create">
+	</form>
+
+	<h1>Existing Jobs Experience</h1>
+	{% for job in jobs|sort(attribute='title') %}
+		<h3>{{ job.title }}</h3>  
+		{{ job.time_period }}<br>
+		{{ job.company }}<br>
+		{{ job.description }}<br><br>
+			
+		<a href="/admin/job/edit/{{ job.id }}"><button class="btn btn-success">Update</button></a>
+		<a href="/admin/job/delete/{{ job.id }}"><button class="btn btn-danger">Delete</button></a>
+	{% endfor %}
+{% endblock %}

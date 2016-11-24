@@ -11,6 +11,7 @@ manager.add_command('db', MigrateCommand)
 
 from models.code_snippet import CodeSnippet
 from models.skill import Skill
+from models.job import Job
 
 
 if __name__ == '__main__':
