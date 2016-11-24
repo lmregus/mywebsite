@@ -3,6 +3,8 @@ from server import app
 
 from controllers import general
 from controllers import code_snippet
+from controllers import skill
+
 
 if __name__ == '__main__':
     app.run(
