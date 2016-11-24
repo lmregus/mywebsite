@@ -1,0 +1,41 @@
+{% extends "admin/admin_layout.html" %}
+
+{{ message }}<br>
+{% block body %}
+	<form method="post" action="/admin/skill/create" name="create_snippet">
+		<fieldset class="form-group">
+			<label for="title">Title</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="title">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="category">Category</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="category">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="programming_language">Proficiency</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="proficiency">
+				</div>
+			</div>
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Create">
+	</form>
+
+	<h1>Existing Skills</h1>
+	{% for skill in skills|sort(attribute='title') %}
+		<h3>{{ skill.title }}</h3> - {{ skill.proficiency }}&#37;
+		<h2>{{ skill.category}}</h2>
+			
+		<a href="/admin/skill/edit/{{ skill.id }}"><button class="btn btn-success">Update</button></a>
+		<a href="/admin/skill/skill/delete/{{ skill.id }}"><button class="btn btn-danger">Delete</button></a>
+	{% endfor %}
+{% endblock %}
