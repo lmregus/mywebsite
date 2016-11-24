@@ -12,8 +12,9 @@ from models.forms import ContactForm
 @app.route('/')
 def index():
     slug = '/'
+    form = ContactForm(request.form)
     page_title = 'Home'
-    return render_template('index.html', slug = slug, page_title = page_title)
+    return render_template('index.html', slug = slug, page_title = page_title, form = form)
 
 @app.route('/resume')
 def resume_page():
