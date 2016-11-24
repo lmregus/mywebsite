@@ -1,0 +1,12 @@
+<!-- import admin layout -->
+
+<h1>Edit Skill</h1>
+
+<form method="post" action="/admin/skill/update" name="update_skill">
+	<input type="hidden"  name="id" value="{{ skill.id }}">
+	Title : <input type="text" name="title" value="{{ skill.title }}"/><br><br>
+	Proficiency : <input type="text" name="proficiency" value="{{ skill.proficiency }}"><br><br>
+	Category : <input type="text" name="category" value="{{ skill.category }}"><br><br>
+	<br><br>
+	<input type="submit" value="Update"><br>
+</form>

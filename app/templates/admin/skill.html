@@ -32,10 +32,11 @@
 
 	<h1>Existing Skills</h1>
 	{% for skill in skills|sort(attribute='title') %}
-		<h3>{{ skill.title }}</h3> - {{ skill.proficiency }}&#37;
-		<h2>{{ skill.category}}</h2>
+		<h3>{{ skill.title }}</h3>  
+		{{ skill.proficiency }}&#37;<br>
+		{{ skill.category}}<br><br>
 			
 		<a href="/admin/skill/edit/{{ skill.id }}"><button class="btn btn-success">Update</button></a>
-		<a href="/admin/skill/skill/delete/{{ skill.id }}"><button class="btn btn-danger">Delete</button></a>
+		<a href="/admin/skill/delete/{{ skill.id }}"><button class="btn btn-danger">Delete</button></a>
 	{% endfor %}
 {% endblock %}

@@ -141,49 +141,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="skills"> 
 						<div class="col-md-6 bar-grids">
 							<h4><span class="glyphicon glyphicon-cog"></span> Technical Skills </h4>
-							<h6>JAVA  <span> 60% </span></h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped active" style="width: 60%">
-								</div>
-							</div>
-							<h6>Django <span> 70% </span></h6>
-							<div class="progress  w3-agile">
-								<div class="progress-bar progress-bar-striped active" style="width: 70%">
-								</div>
-							</div>
-							<h6>Flask<span> 80% </span></h6>
-							<div class="progress  w3-agile">
-								<div class="progress-bar progress-bar-striped active" style="width: 90%">
-								</div>
-							</div>
-							<h6>HTML/CSS <span> 50% </span></h6>
-							<div class="progress  w3-agile">
-								<div class="progress-bar progress-bar-striped active" style="width: 75%">
-								</div>
-							</div>
+							{% for skill in skills %}
+								{% if skill.category == 'technical' %}
+									<h6>{{ skill.title }} <span> {{skill.proficiency}}% </span></h6>
+										<div class="progress">
+											<div class="progress-bar progress-bar-striped active" style="width: {{skill.proficiency}}%">
+											</div>
+										</div>
+								{% endif %}
+							{% endfor %}	
 						</div> 
 						<div class="col-md-6 bar-grids  w3-agile">
 							<h4><span class="glyphicon glyphicon-briefcase"></span> Professional Skills </h4>
-							<h6>Communication<span> 85% </span></h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped active" style="width: 85%">
-								</div>
-							</div>
-							<h6>Adaptability<span> 95% </span></h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped active" style="width: 95%">
-								</div>
-							</div>
-							<h6>Leadership<span>90% </span></h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-striped active" style="width: 90%">
-								</div>
-							</div>
-							<h6>Team work<span> 90% </span></h6>
-							<div class="progress prgs-w3agile-last">
-								<div class="progress-bar progress-bar-striped active" style="width: 86%">
-								</div>
-							</div> 
+							{% for skill in skills %}
+								{% if skill.category == 'professional' %}
+									<h6>{{ skill.title }}<span> {{ skill.proficiency }}% </span></h6>
+										<div class="progress">
+											<div class="progress-bar progress-bar-striped active" style="width: {{skill.proficiency }}%">
+											</div>
+										</div>
+								{% endif %}
+							{% endfor %}
 						</div>
 						<div class="clearfix"> </div>	
 					</div>
