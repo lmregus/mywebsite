@@ -1,0 +1,59 @@
+{% extends "admin/admin_layout.html" %}
+
+{{ message }}<br>
+{% block body %}
+	<form method="post" action="/admin/education/create" name="create_degree">
+		<fieldset class="form-group">
+			<label for="title">Title</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="title">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="school">School</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="school">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="">Degree Type</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="type">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="">Time Period</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="time_period">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="description">Description</label>
+			<div class="row">
+				<div class="col-xs-8">
+					<textarea class="form-control"  name="description" ></textarea>
+				</div>
+			</div>
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Create">
+	</form>
+
+	<h1>Existing Degrees</h1>
+	{% for degree in degrees %}
+		<h3>{{ degree.title }}</h3>
+		{{ degree.school }}<br>
+		{{ degree._type }}<br>
+		{{ degree.time_period }}<br>
+		{{ degree.description }}<br><br>
+		<a href="/admin/education/edit/{{ degree.id }}"><button class="btn btn-success">Update</button></a>
+		<a href="/admin/education/delete/{{ degree.id }}"><button class="btn btn-danger">Delete</button></a>
+	{% endfor %}
+{% endblock %}
