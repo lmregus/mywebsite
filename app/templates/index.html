@@ -183,7 +183,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					{% for job in jobs %}  
 						<div class="experience-grids experience-grids-btm">
 							<div class="experience-left">
-								<h3>{{ job.time_period }}</h3>
+								<h3>{{ job.start_date.strftime('%Y') }} - {% if job.end_date == job.start_date %}Now{% else %}{{ job.end_date.strftime('%Y') }}{% endif %}</h3>
 								<h5>{{ job.company }}</h5>
 							</div>
 							<div class="experience-right">
@@ -209,52 +209,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="modal-body modal-spa">
 					<div class="experience">  
-						<div class="experience-grids">
-							<div class="experience-left">
-								<h3>Now<span>(Bachelor's)</span> </h3>
-								<h5> UMASS Lowell</h5>
-							</div>
-							<div class="experience-right">
-								<h4>Information Technology</h4>
-								<p>Itaque earum rerum hic tenetur a sapiente delectus reiciendis maiores alias Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum iaculis enim, non convallis felis mattis at</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div> 
+						{% for degree in education|sort(attribute='date', reverse=true) %}
 						<div class="experience-grids experience-grids-btm">
 							<div class="experience-left">
-								<h3>Now<span>(Certifcate)</span> </h3>
-								<h5> UMASS Lowell</h5>
+								<h3>{{ degree.date.strftime('%Y') }}<span>({{ degree._type}})</span> </h3>
+								<h5>{{ degree.school }}</h5>
 							</div>
 							<div class="experience-right">
-								<h4>Java Development</h4>
-								<p>Itaque earum rerum hic tenetur a sapiente delectus reiciendis maiores alias Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum iaculis enim, non convallis felis mattis at</p>
+								<h4>{{ degree.title }}</h4>
+								<p>{{ degree.description }}</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div> 
-
-						<div class="experience-grids experience-grids-btm">
-							<div class="experience-left">
-								<h3>2014<span>(Associate's)</span> </h3>
-								<h5> Northern Essex Community College</h5>
-							</div>
-							<div class="experience-right">
-								<h4>Computer Information Science</h4>
-								<p>Itaque earum rerum hic tenetur a sapiente delectus reiciendis maiores alias Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum iaculis enim, non convallis felis mattis at</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div> 
-
-						<div class="experience-grids experience-grids-btm">
-							<div class="experience-left">
-								<h3>2008<span>(3 Years)</span></h3>
-								<h5> Instituto Tecnologico de Santo Domingo</h5>
-							</div>
-							<div class="experience-right">
-								<h4>Ingenieria de Sistemas</h4>
-								<p>Itaque earum rerum hic tenetur a sapiente delectus reiciendis maiores alias Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum iaculis enim, non convallis felis mattis at</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div> 
+						{% endfor %}
 					</div>
 				</div> 
 			</div>

@@ -9,7 +9,7 @@ from models.code_snippet import CodeSnippet
 from models.forms import ContactForm
 from models.skill import Skill
 from models.job import Job
-
+from models.education import Degree
 
 @app.route('/')
 def index():
@@ -17,11 +17,15 @@ def index():
     form = ContactForm(request.form)
     skill = Skill()
     job = Job()
+    jobs = job.get_all()
+    jobs.sort(key=lambda date:date.start_date, reverse=True)
+    education = Degree()
     page_title = 'Home'
     return render_template('index.html', slug = slug, 
                             page_title = page_title, 
                             form = form, skills = skill.get_all(),
-                            jobs = job.get_all())
+                            jobs = jobs,
+                            education = education.get_all())
 
 @app.route('/resume')
 def resume_page():

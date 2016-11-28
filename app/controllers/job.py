@@ -24,7 +24,8 @@ def create_job():
     if request.method == 'POST':
         data = {
             'title': request.form['title'],
-            'time_period': request.form['time_period'],
+            'start_date': request.form['start_date'],
+            'end_date': request.form['end_date'],
             'company': request.form['company'],
             'description': request.form['description'],
         }
@@ -50,7 +51,8 @@ def update_job():
         data = {
             'id': request.form['id'],
             'title': request.form['title'],
-            'time_period': request.form['time_period'],
+            'start_date': request.form['start_date'],
+            'end_date': request.form['end_date'],
             'company': request.form['company'],
             'description': request.form['description'],
         }

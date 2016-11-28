@@ -26,7 +26,7 @@ def create_degree():
             'school': request.form['school'],
             'type': request.form['type'],
             'description': request.form['description'],
-            'time_period': request.form['time_period'],
+            'date': request.form['date'],
         }
         degree = degree.create(data)
         message = degree.title + ' was created'
@@ -52,7 +52,7 @@ def update_degree():
             'school': request.form['school'],
             'type': request.form['type'],
             'description': request.form['description'],
-            'time_period': request.form['time_period'],        
+            'date': request.form['date']
         }
         degree = degree.update(data)
         message = degree.title + ' was updated'

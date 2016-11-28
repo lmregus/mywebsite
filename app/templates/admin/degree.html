@@ -28,10 +28,10 @@
 			</div>
 		</fieldset>
 		<fieldset class="form-group">
-			<label for="">Time Period</label>
+			<label for="">Date(mm/dd/yyyy)</label>
 			<div class="row">
 				<div class="col-xs-4">
-					<input type="text" class="form-control" name="time_period">
+					<input type="text" class="form-control" name="date">
 				</div>
 			</div>
 		</fieldset>
@@ -47,11 +47,11 @@
 	</form>
 
 	<h1>Existing Degrees</h1>
-	{% for degree in degrees %}
+	{% for degree in degrees|sort(attribute='date', reverse=true) %}
 		<h3>{{ degree.title }}</h3>
 		{{ degree.school }}<br>
 		{{ degree._type }}<br>
-		{{ degree.time_period }}<br>
+		{{ degree.date }}<br>
 		{{ degree.description }}<br><br>
 		<a href="/admin/education/edit/{{ degree.id }}"><button class="btn btn-success">Update</button></a>
 		<a href="/admin/education/delete/{{ degree.id }}"><button class="btn btn-danger">Delete</button></a>

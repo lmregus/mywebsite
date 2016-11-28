@@ -12,10 +12,18 @@
 			</div>
 		</fieldset>
 		<fieldset class="form-group">
-			<label for="time_period">Time Period</label>
+			<label for="time_period">Start Date(mm/dd/yyyy)</label>
 			<div class="row">
 				<div class="col-xs-4">
-					<input type="text" class="form-control" name="time_period">
+					<input type="text" class="form-control" name="start_date">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="time_period">End Date(mm/dd/yyyy)</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="end_date">
 				</div>
 			</div>
 		</fieldset>
@@ -39,9 +47,9 @@
 	</form>
 
 	<h1>Existing Jobs Experience</h1>
-	{% for job in jobs|sort(attribute='title') %}
+	{% for job in jobs %}
 		<h3>{{ job.title }}</h3>  
-		{{ job.time_period }}<br>
+		{{ job.start_date }} - {% if job.end_date == job.start_date %}Now{% else %}{{ job.end_date}}{% endif%}<br>
 		{{ job.company }}<br>
 		{{ job.description }}<br><br>
 			
