@@ -56,5 +56,5 @@ class Job(db.Model):
     def delete(self, job_id):
         job = Job.query.get(data['id'])
         db.session.delete(job)
-        db.sesson.commit()
+        db.session.commit()
         return job
