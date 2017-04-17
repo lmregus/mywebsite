@@ -42,3 +42,30 @@ class SiteUser(db.Model):
         db.session.delete(user)
         db.session.commit()
         return user
+
+    def is_authenticaded(self, data):
+        users = SiteUser.query.all()
+        auth_user = ''
+        for user in users:
+            if data['name'] == user.name or data['email'] == user.email:
+                if data['password'] == user.password:
+                    auth_user = user
+                    return True
+            else:
+                return False
+        return False
+
+    def get_id(self, data):
+        users = SiteUser.query.all()
+        for user in users:
+            if data['name'] == user.name or data['email'] == user.email:
+                return user.id
+        return False
+
+    def is_active(self, data):
+        if is_authenticaded(data):
+            return True
+        return False
+
+    def is_anonymous(self):
+        return False
