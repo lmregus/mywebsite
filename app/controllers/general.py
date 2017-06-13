@@ -1,15 +1,25 @@
 from server import app
+from server import login_manager
 
 from flask import render_template
 from flask import request
 from flask import redirect
 from flask import send_file
+from flask_login import login_user
+from flask_login import logout_user
+from flask_login import login_required
 
 from models.code_snippet import CodeSnippet
 from models.forms import ContactForm
 from models.skill import Skill
 from models.job import Job
 from models.education import Degree
+from models.site_user import SiteUser
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return SiteUser().get_by_id(user_id)
 
 @app.route('/')
 def index():
@@ -52,3 +62,22 @@ def contact():
     #code to send form using email
     #if request.method == 'POST' and form.validate(): 
     return render_template('pages/contact.html', slug = slug, page_title = page_title, form = form)
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        data = {
+            'name': request.form['username'],
+            'password': request.form['password']
+        }
+        user = SiteUser().get_by_username(data['name'])
+        if user.is_authenticated(data):
+            login_user(user)
+            return redirect('/admin/code-snippet')
+    return render_template('admin/login.html')
+
+@app.route('/admin/logout', methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return redirect('/') 
