@@ -9,7 +9,10 @@ from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Text
 
+
 login_manager = LoginManager()
+login_manager.login_view = "login"
+
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
