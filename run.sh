@@ -1,3 +1,4 @@
 #!/bin/bash
-cd app 
+cd app
+python migration.py db upgrade
 gunicorn app:app --log-file -
