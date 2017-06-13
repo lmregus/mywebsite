@@ -3,6 +3,7 @@ from server import app
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask_login import login_required
 
 from models.skill import Skill
 
@@ -11,12 +12,14 @@ edit_page_title = 'Edit Skill'
 
 
 @app.route('/admin/skill')
+@login_required
 def skill():
     skills = Skill()
     return render_template('/admin/skill.html', skills = skills.get_all(),
                             page_title = create_page_title)
 
 @app.route('/admin/skill/create', methods = ['POST'])
+@login_required
 def create_skill():
     skill = Skill()
     skills = Skill().get_all()
@@ -35,12 +38,14 @@ def create_skill():
     return render_template('/admin/skill.html', skills = skills, message = message)
 
 @app.route('/admin/skill/edit/<skill_id>', methods = ['POST', 'GET'])
+@login_required
 def edit_skill(skill_id):
     skill = Skill().get_by_id(skill_id)
     return render_template('admin/update_skill.html', skill = skill, 
                             page_title = edit_page_title)
 
 @app.route('/admin/skill/update', methods = ['POST'])
+@login_required
 def update_skill():
     skill = Skill()
     skills = skill.get_all()
@@ -61,6 +66,7 @@ def update_skill():
                             page_title = create_page_title)
 
 @app.route('/admin/skill/delete/<skill_id>')
+@login_required
 def delete_skill(skill_id):
     skill = Skill()
     skills = skill.get_all()

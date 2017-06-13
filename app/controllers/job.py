@@ -3,6 +3,7 @@ from server import app
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask_login import login_required
 
 from models.job import Job
 
@@ -11,12 +12,14 @@ edit_page_title = 'Edit Job'
 
 
 @app.route('/admin/job')
+@login_required
 def job():
     jobs = Job()
     return render_template('/admin/job.html', jobs = jobs.get_all(),
                             page_title = create_page_title)
 
 @app.route('/admin/job/create', methods = ['POST'])
+@login_required
 def create_job():
     job = Job()
     jobs = Job().get_all()
@@ -37,12 +40,14 @@ def create_job():
     return render_template('/admin/job.html', jobs = jobs, message = message)
 
 @app.route('/admin/job/edit/<job_id>', methods = ['POST', 'GET'])
+@login_required
 def edit_job(job_id):
     job = Job().get_by_id(job_id)
     return render_template('admin/update_job.html', job = job, 
                             page_title = edit_page_title)
 
 @app.route('/admin/job/update', methods = ['POST'])
+@login_required
 def update_job():
     job = Job()
     jobs = job.get_all()
@@ -65,6 +70,7 @@ def update_job():
                             page_title = create_page_title)
 
 @app.route('/admin/job/delete/<job_id>')
+@login_required
 def delete_job(job_id):
     job = Job()
     jobs = job.get_all()

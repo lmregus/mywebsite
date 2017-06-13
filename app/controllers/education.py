@@ -3,6 +3,7 @@ from server import app
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask_login import login_required
 
 from models.education import Degree
 
@@ -11,11 +12,13 @@ create_page_title = 'Create Degree'
 edit_page_title = 'Edit Degree'
 
 @app.route('/admin/education')
+@login_required
 def degree():
     degrees = Degree()
     return render_template('/admin/degree.html', degrees = degrees.get_all(), page_title = create_page_title)
 
 @app.route('/admin/education/create', methods = ['POST'])
+@login_required
 def create_degree():
     degree = Degree()
     degrees = degree.get_all()
@@ -36,11 +39,13 @@ def create_degree():
     return render_template('admin/degree.html', degrees = degrees, message = message)
 
 @app.route('/admin/education/edit/<degree_id>', methods = ['POST', 'GET'])
+@login_required
 def edit_degree(degree_id):
     degree = Degree().get_by_id(degree_id)
     return render_template('admin/update_degree.html', degree = degree, page_title = edit_page_title)
 
 @app.route('/admin/education/update', methods = ['POST'])
+@login_required
 def update_degree():
     degree = Degree()
     degrees = degree.get_all()
@@ -61,6 +66,7 @@ def update_degree():
     return render_template('admin/degree.html', degrees = degrees, message = message, page_title = create_page_title)
 
 @app.route('/admin/education/delete/<degree_id>')
+@login_required
 def delete_degree(degree_id):
     degree = Degree()
     degrees = degree.get_all()
