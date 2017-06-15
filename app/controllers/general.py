@@ -10,11 +10,11 @@ from flask_login import logout_user
 from flask_login import login_required
 
 from models.code_snippet import CodeSnippet
-from models.forms import ContactForm
 from models.skill import Skill
 from models.job import Job
 from models.education import Degree
 from models.site_user import SiteUser
+from models.forms import LoginForm
 
 
 @login_manager.user_loader
@@ -24,7 +24,6 @@ def load_user(user_id):
 @app.route('/')
 def index():
     slug = '/'
-    form = ContactForm(request.form)
     skill = Skill()
     job = Job()
     jobs = job.get_all()
@@ -33,7 +32,7 @@ def index():
     page_title = 'Home'
     return render_template('index.html', slug = slug, 
                             page_title = page_title, 
-                            form = form, skills = skill.get_all(),
+                            skills = skill.get_all(),
                             jobs = jobs,
                             education = education.get_all())
 
@@ -45,7 +44,6 @@ def resume_page():
         return send_file('static/pdfs/LuisRegusCV3.pdf', attachment_filename='LuisRegusCV3.pdf')
     except Exception as e:
         return str(e)
-    #return render_template('pages/resume.html', slug = slug, page_title = page_title)
 
 @app.route('/code-snippets')
 def code_snippets():
@@ -54,27 +52,19 @@ def code_snippets():
     slug = 'code-snippets'
     return render_template('pages/code-snippets.html', slug = slug, page_title = page_title, code_snippets = code_snippets)
 
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-    form = ContactForm(request.form)
-    page_title = 'Contact Me'
-    slug = 'contact'
-    #code to send form using email
-    #if request.method == 'POST' and form.validate(): 
-    return render_template('pages/contact.html', slug = slug, page_title = page_title, form = form)
-
 @app.route('/admin/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    form = LoginForm()
+    if form.validate_on_submit():
         data = {
-            'name': request.form['username'],
-            'password': request.form['password']
+            'name': form.username.data,
+            'password': form.password.data
         }
         user = SiteUser().get_by_username(data['name'])
         if user.is_authenticated(data):
             login_user(user)
             return redirect('/admin/code-snippet')
-    return render_template('admin/login.html')
+    return render_template('admin/login.html', form=form)
 
 @app.route('/admin/logout', methods=['GET'])
 @login_required
