@@ -10,6 +10,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     RECAPTCHA_PUBLIC_KEY = "6LeSfyUUAAAAAPP6T4SWpH4wVkWBeiZgw5fKVVJn"
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
     SECRET_KEY = 'secret key'
 
 class ProductionConfig(Config):
