@@ -11,3 +11,4 @@ psycopg2==2.7.1
 requests==2.13.0
 gevent==1.2.1
 gunicorn==19.7.1
+wtf-tinymce==0.1.3
