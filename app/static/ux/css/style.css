@@ -680,11 +680,20 @@ ul.nav.navbar li a {
     font-size: 1.1em; 
     letter-spacing: 2px; 
 }
+.video {
+	background:url(../imgs/home_header_phone.jpg)no-repeat;
+    background-position:0px 0px;
+	text-align: left;
+	min-height: 100%;
+	background-size: cover;
+	padding-bottom: 70px;
+}
 }
 @media (max-width: 667px){
 .banner-text {
     margin: 16em 0 6em;
 }
+
 }
 @media(max-width:640px){
 .modal-header {
