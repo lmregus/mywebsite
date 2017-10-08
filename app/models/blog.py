@@ -15,15 +15,25 @@ class Post(db.Model):
     title = db.Column(db.String(128))
     description = db.Column(db.String(512))
     content = db.Column(db.String(1600))
+    slug = db.Column(db.String(128))
+    status = db.Column(db.Integer)      #0 draft, 1 published
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
     upd_date = db.Column(db.DateTime, onupdate=datetime.now)
 
-    def get_all():
+    def get_all(self):
         posts = Post.query.order_by(Post.pub_date.desc())
+        return posts
+
+    def get_publish(self):
+        posts = Post.query.filter(Post.status == 1)
         return posts
 
     def get_by_id(self, post_id):
         post = Post.query.get(post_id)
+        return post
+
+    def get_by_slug(self, slug):
+        post = Post.query.filter(Post.slug == slug)
         return post
 
     def create(self, data):
@@ -31,15 +41,19 @@ class Post(db.Model):
         post.title = data['title']
         post.description = data['description']
         post.content = data['content']
+        post.slug = data['title'].lower().replace(' ', '-')
+        post.status = data['status']
         db.session.add(post)
         db.session.commit()
-        return job
+        return post
 
     def update(self, data):
         post = Post.query.get(data['id'])
         post.title = data['title']
         post.description = data['description']
         post.content = data['content']
+        post.slug = data['title'].lower().replace(' ', '-')
+        post.status = data['status']
         db.session.add(post)
         db.session.commit()
 
@@ -48,3 +62,6 @@ class Post(db.Model):
         db.session.delete(post)
         db.session.commit()
         return post
+
+    def get_url(self):
+        return "blog/" + self.slug

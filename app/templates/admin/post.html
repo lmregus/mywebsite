@@ -1,0 +1,50 @@
+{% extends "admin/admin_layout.html" %}
+
+{{ message }}<br>
+{% block body %}
+	<form method="post" action="/admin/blog/post/create" name="create_post">
+		<fieldset class="form-group">
+			<label for="title">Title</label>
+			<div class="row">
+				<div class="col-xs-4">
+					<input type="text" class="form-control" name="title">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="description">Description</label>
+			<div class="row">
+				<div class="col-xs-8">
+					<textarea class="form-control"  name="description" ></textarea>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset class="form-group">
+			<label for="content">Content</label>
+			<div class="row">
+				<div class="col-xs-8">
+					<textarea class="form-control"  name="content" ></textarea>
+				</div>
+			</div>
+		</fieldset>		
+		<label for="status">
+			<input type="radio" name="status" value="1"> Publish
+			<input type="radio" name="status" value="0"> Draft
+		</label>
+		<br>
+		<input type="submit" class="btn btn-primary" value="Create">
+	</form>
+
+	<h1>Existing Posts</h1>
+	{% for post in posts|sort(attribute='pub_date', reverse=true) %}
+		<h3>{{ post.title }}</h3>
+		{{ post.slug }}<br>
+		{{ post.pub_date }}<br>
+		{{ post.upd_date }}<br>
+		{{ post.description }}<br>
+		{{ post.content }}<br>
+		{% if post.status == 0 %} Draft {% else %} Publish {% endif %}<br><br>
+		<a href="/admin/blog/post/edit/{{ post.id }}"><button class="btn btn-success">Update</button></a>
+		<a href="/admin/blog/post/delete/{{ post.id }}"><button class="btn btn-danger">Delete</button></a>
+	{% endfor %}
+{% endblock %}

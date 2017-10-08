@@ -5,6 +5,7 @@ from flask import render_template
 from flask import request
 from flask import redirect
 from flask import send_file
+from flask import abort
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
@@ -53,6 +54,7 @@ def code_snippets():
     return render_template('pages/code-snippets.html', slug = slug, page_title = page_title, code_snippets = code_snippets)
 
 @app.route('/admin/login', methods=['GET', 'POST'])
+@app.route('/admin/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -71,3 +73,7 @@ def login():
 def logout():
     logout_user()
     return redirect('/') 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error/404.html'), 404
