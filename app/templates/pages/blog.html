@@ -87,7 +87,7 @@
 							{{ post.title }}
                         </h2>
                         <h3 class="post-subtitle">
-							{{ post.description }}
+							{{ post.description | safe }}
                         </h3>
                     </a>
                     <p class="post-meta">Posted by <a href="#">LMRegus</a> on {{ post.pub_date.strftime("%B %d, %Y")}}</p>

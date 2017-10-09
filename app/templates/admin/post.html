@@ -42,7 +42,7 @@
 		{{ post.pub_date }}<br>
 		{{ post.upd_date }}<br>
 		{{ post.description }}<br>
-		{{ post.content }}<br>
+		{{ post.content | safe }}<br>
 		{% if post.status == 0 %} Draft {% else %} Publish {% endif %}<br><br>
 		<a href="/admin/blog/post/edit/{{ post.id }}"><button class="btn btn-success">Update</button></a>
 		<a href="/admin/blog/post/delete/{{ post.id }}"><button class="btn btn-danger">Delete</button></a>

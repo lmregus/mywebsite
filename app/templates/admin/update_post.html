@@ -1,5 +1,6 @@
-<!-- import admin layout -->
+{% extends "admin/admin_layout.html" %}
 
+{% block body %}
 <h1>Edit Post</h1>
 
 <form method="post" action="/admin/blog/post/update" name="update_post">
@@ -14,3 +15,4 @@
  	</label>
 	<input type="submit" value="Update"><br>
 </form>
+{% endblock %}
