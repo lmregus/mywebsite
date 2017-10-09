@@ -66,12 +66,12 @@ def delete_post(post_id):
     message = post.title + ' deleted'
     return render_template('admin/post.html', posts = posts, message = message, page_title = create_page_title)
 
-@app.route('/blog/post/<string:slug>', methods = ['GET'])
+@app.route('/blog/post/<slug>', methods = ['GET'])
 def post(slug):
     blog = Post()
     posts = blog.get_all()
     post = blog.get_by_slug(slug)
-    slugs = [post.slug for post in posts]
+    slugs = [p.slug for p in posts]
     if(slug not in slugs):
         abort(404)
     return render_template('pages/post.html', post = post)
