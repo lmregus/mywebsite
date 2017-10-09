@@ -4,6 +4,8 @@ from flask import abort
 from flask import render_template
 from flask import request
 
+from flask_login import login_required
+
 from models.blog import Post
 
 
@@ -12,11 +14,13 @@ edit_page_title = 'Edit Post'
 posts_per_page = 5
 
 @app.route('/admin/blog/post')
+@login_required
 def blog():
     blog = Post()
     return render_template('/admin/post.html', posts = blog.get_all(), page_title = create_page_title)
 
 @app.route('/admin/blog/post/create', methods = ['POST'])
+@login_required
 def create_post():
     blog = Post()
     posts = blog.get_all()
@@ -35,11 +39,13 @@ def create_post():
     return render_template('admin/post.html', posts = posts, message = message, page_title = create_page_title)
 
 @app.route('/admin/blog/post/edit/<post_id>', methods = ['POST', 'GET'])
+@login_required
 def edit_post(post_id):
     post = Post().get_by_id(post_id)
     return render_template('admin/update_post.html', post = post, page_title = edit_page_title)
 
 @app.route('/admin/blog/post/update', methods = ['POST'])
+@login_required
 def update_post():
     blog = Post()
     posts = blog.get_all()
@@ -59,6 +65,7 @@ def update_post():
     return render_template('admin/post.html', posts = posts, message = message, page_title = edit_page_title)
 
 @app.route('/admin/blog/post/delete/<int:post_id>')
+@login_required
 def delete_post(post_id):
     blog = Post()
     posts = blog.get_all()
