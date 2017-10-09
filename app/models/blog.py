@@ -33,7 +33,11 @@ class Post(db.Model):
         return post
 
     def get_by_slug(self, slug):
-        post = Post.query.filter(Post.slug == slug)
+        posts = Post.query.all()
+        post = None
+        for p in posts:
+            if p.slug == slug:
+                post = p
         return post
 
     def create(self, data):
