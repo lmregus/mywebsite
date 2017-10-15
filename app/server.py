@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_sslify import SSLify
 
 from sqlalchemy import Column
 from sqlalchemy import Integer
@@ -18,6 +19,7 @@ db = SQLAlchemy(app)
 
 if os.environ.get('HEROKU'):
     app.config.from_object('config.ProductionConfig')
+    sslify = SSLify(app)
 else:
     app.config.from_object('config.DevelopmentConfig')
 
