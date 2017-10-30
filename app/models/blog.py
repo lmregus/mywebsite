@@ -14,7 +14,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
     description = db.Column(db.String(512))
-    content = db.Column(db.String(1600))
+    content = db.Column(db.String(50000))
     slug = db.Column(db.String(128))
     status = db.Column(db.Integer)      #0 draft, 1 published
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
