@@ -17,7 +17,7 @@ login_manager.login_view = "login"
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
-if os.environ.get('HEROKU'):
+if os.environ.get('HEROKU') != 'False':
     app.config.from_object('config.ProductionConfig')
     sslify = SSLify(app)
 else:
