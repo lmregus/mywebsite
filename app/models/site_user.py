@@ -61,10 +61,10 @@ class SiteUser(db.Model):
             if data['name'] == user.name:
                 if bcrypt.checkpw(data['password'].encode('utf8'), user.password.encode('utf8')):
                     auth_user = user
-                    print "passwords match"
+                    print("passwords match")
                     return True
                 else:
-                    print "paswords dont match"
+                    print("paswords dont match")
             else:
                 return False
         return False
