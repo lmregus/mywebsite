@@ -9,7 +9,7 @@ flask-login==0.4.1
 Flask-SSLify==0.1.5
 bcrypt==3.1.6
 psycopg2==2.8.2
-requests==2.16.0
+requests==2.20.0
 gevent==1.4.0
 gunicorn==19.9.0
 wtf-tinymce==0.1.3
